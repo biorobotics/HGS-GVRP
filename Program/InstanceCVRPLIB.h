@@ -6,7 +6,7 @@
 #define INSTANCECVRPLIB_H
 #include<string>
 #include<vector>
-#include <./../../spStruct.h>
+// #include <./../../spStruct.h>
 
 class InstanceCVRPLIB
 {

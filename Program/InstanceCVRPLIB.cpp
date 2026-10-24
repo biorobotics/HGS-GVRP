@@ -37,10 +37,10 @@ InstanceCVRPLIB::InstanceCVRPLIB(std::string pathToInstance, bool isRoundingInte
 				else if (content == "VEHICLES") inputFile >> content2 >> real_nbVeh;
 				else if (content == "DIMENSION") inputFile >> content2 >> n_nodes;
 
-				else throw std::string("Unexpected data in input file: " + content);
+				else throw std::runtime_error("Unexpected data in input file: " + content);
 			}
-			if (nbClients <= 0) throw std::string("Number of nodes is undefined");
-			if (vehicleCapacity == 1.e30) throw std::string("Vehicle capacity is undefined");
+			if (nbClients <= 0) throw std::runtime_error("Number of nodes is undefined");
+			if (vehicleCapacity == 1.e30) throw std::runtime_error("Vehicle capacity is undefined");
 
 			x_coords = std::vector<double>(n_nodes);
 			y_coords = std::vector<double>(n_nodes);
@@ -60,11 +60,11 @@ InstanceCVRPLIB::InstanceCVRPLIB(std::string pathToInstance, bool isRoundingInte
 			for (int i = 0; i < n_nodes; i++)
 			{
 				inputFile >> node_number >> x_coords[i] >> y_coords[i];
-				if (node_number != i + 1) throw std::string("The node numbering is not in order.");
+				if (node_number != i + 1) throw std::runtime_error("The node numbering is not in order.");
 			}
 			// Reading cluster membership information
 			inputFile >> content;
-			if (content != "GVRP_SET_SECTION") throw std::string("Unexpected data in input file: " + content);
+			if (content != "GVRP_SET_SECTION") throw std::runtime_error("Unexpected data in input file: " + content);
 			int i = 1;
 			int cluster_number;
 			inputFile >> cluster_number;
@@ -80,7 +80,7 @@ InstanceCVRPLIB::InstanceCVRPLIB(std::string pathToInstance, bool isRoundingInte
 						}
 
 						inputFile >> cluster_number;
-						if (cluster_number != i ) throw std::string("The cluster numbering is not in order.");
+						if (cluster_number != i ) throw std::runtime_error("The cluster numbering is not in order.");
 
 						break;
 					}
@@ -102,7 +102,7 @@ InstanceCVRPLIB::InstanceCVRPLIB(std::string pathToInstance, bool isRoundingInte
 
 			// Reading demand information
 			inputFile >> content;
-			if (content != "DEMAND_SECTION") throw std::string("Unexpected data in input file: " + content);
+			if (content != "DEMAND_SECTION") throw std::runtime_error("Unexpected data in input file: " + content);
 			demands[0] = 0;
 			for (int i = 1; i <= nbClients; i++)
 			{
@@ -119,7 +119,7 @@ InstanceCVRPLIB::InstanceCVRPLIB(std::string pathToInstance, bool isRoundingInte
 				//Reading intra cluster distances 
 				nodesCluLevel.resize(n_nodes * n_nodes, std::vector<double>(4));
 				inputFile >> content;
-				if (content != "INTRA_CLUSTER_DISTANCE" && content != "EOF") throw std::string("Unexpected data in input file: " + content);
+				if (content != "INTRA_CLUSTER_DISTANCE" && content != "EOF") throw std::runtime_error("Unexpected data in input file: " + content);
 				int k = 1;
 				for (int i = 0; i < n_nodes; i++)
 				{
@@ -333,9 +333,9 @@ InstanceCVRPLIB::InstanceCVRPLIB(std::string pathToInstance, bool isRoundingInte
 
 				// Reading depot information (in all current instances the depot is represented as node 1, the program will return an error otherwise)
 				inputFile >> content >> content2 >> content3 >> content3;
-				//			if (content != "DEPOT_SECTION") throw std::string("Unexpected data in input file: " + content);
-				//			if (content2 != "1") throw std::string("Expected depot index 1 instead of " + content2);
-				//if (content != "EOF") throw std::string("Unexpected data in input file: " + content3);
+				//			if (content != "DEPOT_SECTION") throw std::runtime_error("Unexpected data in input file: " + content);
+				//			if (content2 != "1") throw std::runtime_error("Expected depot index 1 instead of " + content2);
+				//if (content != "EOF") throw std::runtime_error("Unexpected data in input file: " + content3);
 
 
 
@@ -503,9 +503,9 @@ InstanceCVRPLIB::InstanceCVRPLIB(std::string pathToInstance, bool isRoundingInte
 
 				// Reading depot information (in all current instances the depot is represented as node 1, the program will return an error otherwise)
 				inputFile >> content >> content2 >> content3 >> content3;
-				//			if (content != "DEPOT_SECTION") throw std::string("Unexpected data in input file: " + content);
-				//			if (content2 != "1") throw std::string("Expected depot index 1 instead of " + content2);
-				if (content != "EOF") throw std::string("Unexpected data in input file: " + content3);				// Calculating 2D Euclidean Distance
+				//			if (content != "DEPOT_SECTION") throw std::runtime_error("Unexpected data in input file: " + content);
+				//			if (content2 != "1") throw std::runtime_error("Expected depot index 1 instead of " + content2);
+				if (content != "EOF") throw std::runtime_error("Unexpected data in input file: " + content3);				// Calculating 2D Euclidean Distance
 				dist_mtx = std::vector < std::vector< double > >(nbClients + 1, std::vector <double>(nbClients + 1));
 				//dist_mtx_nodes = std::vector < std::vector< double > >(n_nodes, std::vector <double>(n_nodes));
 
@@ -543,12 +543,12 @@ InstanceCVRPLIB::InstanceCVRPLIB(std::string pathToInstance, bool isRoundingInte
 
 				// Reading depot information (in all current instances the depot is represented as node 1, the program will return an error otherwise)
 				inputFile >> content >> content2 >> content3 >> content3;
-				//			if (content != "DEPOT_SECTION") throw std::string("Unexpected data in input file: " + content);
-				//			if (content2 != "1") throw std::string("Expected depot index 1 instead of " + content2);
-				if (content != "EOF") throw std::string("Unexpected data in input file: " + content3);
+				//			if (content != "DEPOT_SECTION") throw std::runtime_error("Unexpected data in input file: " + content);
+				//			if (content2 != "1") throw std::runtime_error("Expected depot index 1 instead of " + content2);
+				if (content != "EOF") throw std::runtime_error("Unexpected data in input file: " + content3);
 			}
 		}
 		else
-			throw std::string("Impossible to open instance file: " + pathToInstance);
+			throw std::runtime_error("Impossible to open instance file: " + pathToInstance);
 	
 	}

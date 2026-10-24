@@ -111,13 +111,13 @@ Params::Params(
 	// Safeguards to avoid possible numerical instability in case of instances containing arbitrarily small or large numerical values
 	if (maxDist < 0.1 || maxDist > 100000)
 	//if (maxDist < 0.1 )
-		throw std::string(
+		throw std::runtime_error(
 			"The distances are of very small or large scale. This could impact numerical stability. Please rescale the dataset and run again.");
 	if (maxDemand < 0.1 || maxDemand > 100000)
-		throw std::string(
+		throw std::runtime_error(
 			"The demand quantities are of very small or large scale. This could impact numerical stability. Please rescale the dataset and run again.");
 	if (nbVehicles < std::ceil(totalDemand / vehicleCapacity))
-		throw std::string("Fleet size is insufficient to service the considered clients.");
+		throw std::runtime_error("Fleet size is insufficient to service the considered clients.");
 
 	// A reasonable scale for the initial values of the penalties
 	penaltyDuration = 1;

@@ -92,7 +92,7 @@ void Population::updateBiasedFitnesses(SubPopulation & pop)
 void Population::removeWorstBiasedFitness(SubPopulation & pop)
 {
 	updateBiasedFitnesses(pop);
-	if (pop.size() <= 1) throw std::string("Eliminating the best individual: this should not occur in HGS");
+	if (pop.size() <= 1) throw std::runtime_error("Eliminating the best individual: this should not occur in HGS");
 
 	Individual * worstIndividual = NULL;
 	int worstIndividualPosition = -1;

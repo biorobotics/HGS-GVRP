@@ -46,7 +46,7 @@ public:
 		if (argc % 2 != 1 || argc > 35 || argc < 3)
 		{
 			std::cout << "----- NUMBER OF COMMANDLINE ARGUMENTS IS INCORRECT: " << argc << std::endl;
-			display_help(); throw std::string("Incorrect line of command");
+			display_help(); throw std::runtime_error("Incorrect line of command");
 		}
 		else
 		{
@@ -96,7 +96,7 @@ public:
 				else
 				{
 					std::cout << "----- ARGUMENT NOT RECOGNIZED: " << std::string(argv[i]) << std::endl;
-					display_help(); throw std::string("Incorrect line of command");
+					display_help(); throw std::runtime_error("Incorrect line of command");
 				}
 			}
 		}

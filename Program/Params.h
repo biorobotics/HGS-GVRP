@@ -39,7 +39,7 @@ SOFTWARE.*/
 #include <algorithm>
 #include <unordered_set>
 #include <random>
-#include <./../../spStruct.h>
+// #include <./../../spStruct.h>
 #define MY_EPSILON 0.00001 // Precision parameter, used to avoid numerical instabilities
 #define PI 3.14159265359
 

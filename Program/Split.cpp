@@ -87,7 +87,7 @@ int Split::splitSimple(Individual & indiv)
 	}
 
 	if (potential[0][params.nbClients] > 1.e29)
-		throw std::string("ERROR : no Split solution has been propagated until the last node");
+		throw std::runtime_error("ERROR : no Split solution has been propagated until the last node");
 
 	// Filling the chromR structure
 	for (int k = params.nbVehicles - 1; k >= maxVehicles; k--)
@@ -184,7 +184,7 @@ int Split::splitLF(Individual & indiv)
 	}
 
 	if (potential[maxVehicles][params.nbClients] > 1.e29)
-		throw std::string("ERROR : no Split solution has been propagated until the last node");
+		throw std::runtime_error("ERROR : no Split solution has been propagated until the last node");
 
 	// It could be cheaper to use a smaller number of vehicles
 	double minCost = potential[maxVehicles][params.nbClients];
