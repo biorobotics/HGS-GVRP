@@ -13,7 +13,7 @@ std::pair<double, std::vector<int>> dijkstra(vector<int> path, int origin, int d
     }
     for (int i = origin; i <= dest - 1; i++)
     {
-        int n_tail = arcscluster[0][path[i]].size();
+        // The 0 here is a red herring. They are just figuring out how many nodes are in the cluster path[i + 1], and then getting the node indices at that cluster
         int n_head = arcscluster[0][path[i + 1]].size();
         for (int k = 0; k < n_head; k++) {
             clients[arcscluster[0][path[i + 1]][k][1]].cour = arcscluster[0][path[i + 1]][k][1];
