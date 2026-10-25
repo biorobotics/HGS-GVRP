@@ -18,11 +18,12 @@ Params::Params(
 	int depot,
 	const std::vector<std::vector<double>>& arcs,
 	const std::vector<std::vector<std::vector<std::vector<double>>>>& arcscluster,
-	const std::vector<std::vector<double>>& dist_mtxN
+	const std::vector<std::vector<double>>& dist_mtxN,
+  double cost_thresh
 )
 	: ap(ap), isDurationConstraint(isDurationConstraint), nbVehicles(nbVeh), durationLimit(durationLimit),
 	  vehicleCapacity(vehicleCapacity), timeCost(dist_mtx), verbose(verbose), depot(depot), arcs(arcs), arcscluster(arcscluster),
-	  dist_mtxN(dist_mtxN)
+	  dist_mtxN(dist_mtxN), cost_thresh(cost_thresh)
 {
 	// This marks the starting time of the algorithm
 	startTime = clock();

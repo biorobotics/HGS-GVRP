@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
 			//VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 			Params params(cvrp.x_coords, cvrp.y_coords, cvrp.dist_mtx, cvrp.service_time, cvrp.demands,
-				cvrp.vehicleCapacity, cvrp.durationLimit, cvrp.real_nbVeh, cvrp.isDurationConstraint, commandline.verbose, commandline.ap, cvrp.depot, cvrp.arcs, cvrp.arcscluster, cvrp.dist_mtxN);
+				cvrp.vehicleCapacity, cvrp.durationLimit, cvrp.real_nbVeh, cvrp.isDurationConstraint, commandline.verbose, commandline.ap, cvrp.depot, cvrp.arcs, cvrp.arcscluster, cvrp.dist_mtxN, 0.);
 
 			// Running HGS
 			Genetic solver(params);

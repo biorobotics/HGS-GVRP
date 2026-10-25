@@ -14,6 +14,10 @@ void Genetic::run()
 	if (params.verbose) std::cout << "----- STARTING GENETIC ALGORITHM" << std::endl;
 	for (nbIter = 0 ; nbIterNonProd <= params.ap.nbIter && (params.ap.timeLimit == 0 || (double)(clock()-params.startTime)/(double)CLOCKS_PER_SEC < params.ap.timeLimit) ; nbIter++)
 	{	
+    if (population.getBestFound() != NULL && population.getBestFound()->eval.distance < params.cost_thresh) {
+      std::cout << "Returning because we found a solution with cost lower than the provided threshold" << std::endl;
+      break;
+    }
 		/* SELECTION AND CROSSOVER */
 		crossoverOX(offspring, population.getBinaryTournament(),population.getBinaryTournament());
 
@@ -47,11 +51,14 @@ void Genetic::run()
 		if (nbIter % params.ap.nbIterTraces == 0) population.printState(nbIter, nbIterNonProd);
 
 		/* FOR TESTS INVOLVING SUCCESSIVE RUNS UNTIL A TIME LIMIT: WE RESET THE ALGORITHM/POPULATION EACH TIME maxIterNonProd IS ATTAINED*/
+    // Anoop: I am taking this out because I want to resample in IRGV when we reach params.ap.nbIter nonimproving iterations
+    /*
 		if (params.ap.timeLimit != 0 && nbIterNonProd == params.ap.nbIter)
 		{
 			population.restart();
 			nbIterNonProd = 1;
 		}
+    */
 	}
 	if (params.verbose) std::cout << "----- GENETIC ALGORITHM FINISHED AFTER " << nbIter << " ITERATIONS. TIME SPENT: " << (double)(clock() - params.startTime) / (double)CLOCKS_PER_SEC << std::endl;
 }

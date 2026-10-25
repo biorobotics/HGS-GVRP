@@ -89,6 +89,7 @@ public:
 	const std::vector< std::vector< double > >& arcs;
 	const std::vector<std::vector<std::vector<std::vector<double>>>>& arcscluster;
 	const std::vector< std::vector< double > >& dist_mtxN;	// Distance matrix node level
+  double cost_thresh; // Anoop: if we get a solution with cost < cost_thresh, terminate
 
 	// Initialization from a given data set
 	Params(const std::vector<double>& x_coords,
@@ -105,8 +106,8 @@ public:
 		int depot,
 		const std::vector<std::vector<double>>& arcs,
 		const std::vector<std::vector<std::vector<std::vector<double>>>>& arcscluster,
-		const std::vector<std::vector<double>>& dist_mtxN
-
+		const std::vector<std::vector<double>>& dist_mtxN,
+    double cost_thresh
 	);
 };
 #endif
